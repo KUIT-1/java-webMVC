@@ -22,19 +22,19 @@ public class DispatcherServlet extends HttpServlet{
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String pathAfterRequest = proceed(req, res);
+        String nextView = proceed(req, res);
 
-        if(pathAfterRequest.startsWith(REDIRECT)){
-            String path = pathAfterRequest.split(":")[1];
-            res.sendRedirect(path);
+        if(nextView.startsWith(REDIRECT)){
+            nextView = nextView.substring(REDIRECT.length());
+            res.sendRedirect(nextView);
             return;
         }
-        RequestDispatcher rd = req.getRequestDispatcher(pathAfterRequest);
+        RequestDispatcher rd = req.getRequestDispatcher(nextView);
         rd.forward(req, res);
         return;
     }
 
-    private String proceed(HttpServletRequest req,HttpServletResponse res){
+    private String proceed(HttpServletRequest req, HttpServletResponse res){
         String uri = req.getRequestURI();
         Controller controller = requestMapper.get(uri);
 

@@ -20,11 +20,8 @@ public class RequestMapper {
 
     public static Controller get(String url){
         if(requestMap.containsKey(url)){
-            System.out.print("url : "+url);
             return requestMap.get(url);
         }
-        System.out.print("url : "+url);
-
         return new JustGetController();
     }
 
