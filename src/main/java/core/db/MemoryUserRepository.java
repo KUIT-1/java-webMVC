@@ -35,7 +35,8 @@ public class MemoryUserRepository {
 
     public void changeUserInfo(User user) {
         if (users.get(user.getUserId()) != null) {
-            users.put(user.getUserId(), user);
+            findUserById(user.getUserId()).update(user);
+            //users.put(user.getUserId(), user);
         }
     }
 }

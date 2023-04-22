@@ -193,7 +193,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </div>\n");
       out.write("    <div class=\"collapse navbar-collapse\" id=\"navbar-collapse2\">\n");
       out.write("      <ul class=\"nav navbar-nav navbar-right\">\n");
-      out.write("        <li class=\"active\"><a href=\"index.html\">Posts</a></li>\n");
+      out.write("        <li class=\"active\"><a href=\"home.jsp\">Posts</a></li>\n");
       out.write("        ");
       if (_jspx_meth_c_005fchoose_005f0(_jspx_page_context))
         return;
@@ -259,7 +259,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </ul>\n");
       out.write("                </div>\n");
       out.write("                <div class=\"col-md-3 qna-write\">\n");
-      out.write("                    <a href=\"./qna/form.html\" class=\"btn btn-primary pull-right\" role=\"button\">질문하기</a>\n");
+      out.write("                    <a href=\"./qna/form.jsp\" class=\"btn btn-primary pull-right\" role=\"button\">질문하기</a>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
