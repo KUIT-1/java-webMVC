@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 <html lang="ko">
@@ -27,25 +28,29 @@
         </tr>
         </thead>
         <tbody>
-        <form action="/user/updateForm" method="get">
-            <%
-                Collection<User> users = (Collection<User>) request.getAttribute("users");
-                for (User user : users) {
-            %>
-            <tr>
-                <th class="col-md-3"><%= user.getUserId() %>
-                </th>
-                <th class="col-md-3"><%= user.getName() %>
-                </th>
-                <th class="col-md-3"><%= user.getEmail() %>
-                </th>
+        <%
+            Collection<User> users = (Collection<User>) request.getAttribute("users");
+            for (User user : users) {
+        %>
+        <tr>
+            <th class="col-md-3"><%= user.getUserId() %>
+            </th>
+            <th class="col-md-3"><%= user.getName() %>
+            </th>
+            <th class="col-md-3"><%= user.getEmail() %>
+            </th>
+            <form action="/user/updateForm" method="get">
+
                 <input type="hidden" id="userId" name="userId" value="<%= user.getUserId() %>">
-                <th class="col-md-3"><button class="btn btn-success" type="submit" >수정</button></th>
-            </tr>
-            <%
-                }
-            %>
-        </form>
+                <th class="col-md-3">
+                    <button class="btn btn-success" type="submit">수정</button>
+                </th>
+            </form>
+
+        </tr>
+        <%
+            }
+        %>
         </tbody>
     </table>
 </div>
