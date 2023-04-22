@@ -27,22 +27,25 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            Collection<User> users = (Collection<User>) request.getAttribute("users");
-            for (User user : users) {
-        %>
-        <tr>
-            <th class="col-md-3"><%= user.getUserId() %>
-            </th>
-            <th class="col-md-3"><%= user.getName() %>
-            </th>
-            <th class="col-md-3"><%= user.getEmail() %>
-            </th>
-            <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
-        </tr>
-        <%
-            }
-        %>
+        <form action="/user/updateForm" method="get">
+            <%
+                Collection<User> users = (Collection<User>) request.getAttribute("users");
+                for (User user : users) {
+            %>
+            <tr>
+                <th class="col-md-3"><%= user.getUserId() %>
+                </th>
+                <th class="col-md-3"><%= user.getName() %>
+                </th>
+                <th class="col-md-3"><%= user.getEmail() %>
+                </th>
+                <input type="hidden" id="userId" name="userId" value="<%= user.getUserId() %>">
+                <th class="col-md-3"><button class="btn btn-success" type="submit" >수정</button></th>
+            </tr>
+            <%
+                }
+            %>
+        </form>
         </tbody>
     </table>
 </div>
