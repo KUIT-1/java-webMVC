@@ -24,7 +24,7 @@
             <%
                 Collection<User> users = (Collection<User>) request.getAttribute("users");
                 for (User user : users) {
-                    String userLink = "/user/update?userId=" + user.getUserId();
+                    String userLink = "/user/updateForm?userId=" + user.getUserId();
             %>
             <tr>
                 <th class="col-md-3"><%= user.getUserId() %>

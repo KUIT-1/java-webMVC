@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/user/update")
+@WebServlet(value = "/user/updateForm")
 public class UpdateUserFormController extends HttpServlet {
 
     User user;
