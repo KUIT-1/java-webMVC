@@ -22,8 +22,9 @@
             </thead>
             <tbody>
             <%
-                Collection<User> users = (Collection<User>) request.getAttribute("users");
-                for (User user : users) {
+                User user = (User) request.getAttribute("user");
+                //Collection<User> users = (Collection<User>) request.getAttribute("users");
+                //for (User user : users) {
                     String userLink = "/user/updateForm?userId=" + user.getUserId();
             %>
             <tr>
@@ -36,7 +37,7 @@
                 <th class="col-md-3"><a href=<%= userLink %> class="btn btn-success" role="button">수정</a></th>
             </tr>
             <%
-                }
+                //}
             %>
             </tbody>
         </table>

@@ -21,9 +21,11 @@ public class LoginController extends HttpServlet {
         String loginPw = req.getParameter("password");
 
         User user = MemoryUserRepository.getInstance().findUserById(loginId);
-        if(user == null) throw new NullPointerException("아이디에 해당하는 회원이 없습니다");
+        if(user == null)
+            resp.sendRedirect("/user/loginFailed.jsp");
 
-        if(!user.getPassword().equals(loginPw)) throw new NullPointerException("비밀번호가 다릅니다");
+        if(!user.getPassword().equals(loginPw))
+            resp.sendRedirect("/user/loginFailed.jsp");
 
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
