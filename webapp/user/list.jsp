@@ -24,6 +24,7 @@
             <%
                 Collection<User> users = (Collection<User>) request.getAttribute("users");
                 for (User user : users) {
+                    String userLink = "/user/update?userId=" + user.getUserId();
             %>
             <tr>
                 <th class="col-md-3"><%= user.getUserId() %>
@@ -32,7 +33,7 @@
                 </th>
                 <th class="col-md-3"><%= user.getEmail() %>
                 </th>
-                <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
+                <th class="col-md-3"><a href=<%= userLink %> class="btn btn-success" role="button">수정</a></th>
             </tr>
             <%
                 }
