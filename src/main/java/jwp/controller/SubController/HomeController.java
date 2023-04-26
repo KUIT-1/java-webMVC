@@ -1,7 +1,8 @@
-package jwp.controller;
+package jwp.controller.SubController;
 
 
 import core.db.MemoryUserRepository;
+import jwp.controller.Controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,12 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
+public class HomeController implements Controller {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/home.jsp");
-        rd.forward(req,resp);
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        return "/home.jsp";
     }
 }

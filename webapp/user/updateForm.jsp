@@ -16,7 +16,7 @@
            <%
               User user = (User) request.getAttribute("user");
             %>
-          <form name="update" method="post" action="/user/updateForm">
+          <form name="update" method="post" action="/user/update">
             <div class="form-floating">
               <input type="text" class="form-control" id="userId" name="userId" placeholder="Id" value= <%= user.getUserId() %> readonly>
               <label for="userId">User Id</label>
