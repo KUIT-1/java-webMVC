@@ -3,19 +3,14 @@ package jwp.controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+public class LoginController implements Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
 
@@ -23,16 +18,14 @@ public class LoginController extends HttpServlet {
         User userById = repository.findUserById(userId);
 
         if (userById == null) {
-            resp.sendRedirect("/user/login_failed");
-            return;
+            return "redirect:/user/login_failed";
         }
         if (!userById.matchPassword(password)) {
-            resp.sendRedirect("/user/login_failed");
-            return;
+            return "redirect:/user/login_failed";
         }
 
         HttpSession session = req.getSession();
         session.setAttribute("user", userById);
-        resp.sendRedirect("/");
+        return "redirect:/";
     }
 }
