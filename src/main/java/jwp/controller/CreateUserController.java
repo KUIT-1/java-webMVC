@@ -13,14 +13,15 @@ import java.io.IOException;
 @WebServlet("/user/signup")
 public class CreateUserController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User(request.getParameter("userId"),
+                request.getParameter("password"),
+                request.getParameter("name"),
+                request.getParameter("email"));
 
         MemoryUserRepository.getInstance().addUser(user);
-        System.out.println("??");
-        resp.sendRedirect("/user/list");
+        String userId = request.getParameter("userId");
+        //System.out.println("create  " + userId);
+        response.sendRedirect("/user/login.jsp");
     }
 }

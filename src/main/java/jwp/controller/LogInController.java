@@ -14,20 +14,22 @@ import java.io.IOException;
 @WebServlet("/user/login")
 public class LogInController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("password");
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        String userId = request.getParameter("userId");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+
         User logInUser = new User(userId, password, name, email);
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
         if (user != null && user.isSameUser(logInUser)) {
-            session.setAttribute("user", user);
-            resp.sendRedirect("/");
+            session.setAttribute("user", user); // 세션 정보 저장
+            response.sendRedirect("/");
             return;
         }
-        resp.sendRedirect("/user/login_failed.jsp");
+        response.sendRedirect("/user/login_failed.jsp");
     }
 }
