@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         req.setAttribute("userId",userId);
-        resp.sendRedirect("/user/Updateform.jsp");
+        return "/user/Updateform.jsp";
     }
 }
