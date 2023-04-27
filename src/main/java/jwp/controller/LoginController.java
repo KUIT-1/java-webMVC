@@ -20,14 +20,15 @@ public class LoginController extends HttpServlet {
         String userId=req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         String password=req.getParameter("password");
-        if(user.getPassword().equals(password)){
+        if(user!=null&user.getPassword().equals(password)){
             System.out.println("로그인 성공!");
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-        }else{
-            System.out.println("로그인 실패!");
+            resp.sendRedirect("/");
+            return;
         }
+        System.out.println("로그인 실패!");
+        resp.sendRedirect("/user/loginFailed.jsp");
 
-        resp.sendRedirect("/");
     }
 }
