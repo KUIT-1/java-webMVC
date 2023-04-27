@@ -8,6 +8,10 @@
 
 ### MVC 패턴 적용
 
+
+
 - Controller interface : service
-- DispatcherServlet : 클라이언트의 요청 URL 를 받음
+- DispatcherServlet : 클라이언트의 요청 URL 를 받음(사용자의 최초 진입 지점 -> 뷰에 대한 직접 접근을 방지)
+: 모든 요청 url 에 대하여 DispatcherServlet 이 적절한 Controller 을 통해 처리.
+
 - RequestMapping : 요청 URL 에 따라서 적절한 Controller 에게 작업을 위임

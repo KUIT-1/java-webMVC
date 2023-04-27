@@ -27,7 +27,7 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String uri = request.getRequestURI();
-        System.out.println(uri);
+        //System.out.println(uri);
         Controller controller = requestMapping.getController(uri);
         // request uri 에 따른 적당한 Controller 를 꺼내옴
         try{

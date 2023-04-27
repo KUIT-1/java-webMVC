@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RequestMapping {
     // URL, Controller Mapping
-    private Map<String, Controller> mapper = new HashMap<>();
+    private final Map<String, Controller> mapper = new HashMap<>();
 
     public void init() {
         mapper.put("/user/form", new ForwardController("/user/form.jsp"));
