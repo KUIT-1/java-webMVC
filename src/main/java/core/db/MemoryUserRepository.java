@@ -29,6 +29,10 @@ public class MemoryUserRepository {
         return users.get(userId);
     }
 
+    public void update(User user){
+        changeUserInfo(user);
+    }
+
     public Collection<User> findAll() {
         return users.values();
     }
