@@ -18,6 +18,7 @@ public class UpdateUserFormController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("UpdateUserFormController doGet() 실행됨");
         String userId = req.getParameter("userId");
+        System.out.println("updateForm의 userId:"+userId);
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (user != null) {
             req.setAttribute("user",user);
@@ -27,4 +28,6 @@ public class UpdateUserFormController extends HttpServlet {
         }
         resp.sendRedirect("/");
     }
+
+
 }
