@@ -1,30 +1,23 @@
 package jwp.controller;
 
+import core.controller.Controller;
 import core.db.MemoryUserRepository;
 import jwp.session.UserSession;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
-@WebServlet("/user/list")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        if(UserSession.isLogined(request.getSession())){
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(UserSession.isLogin(request.getSession())){
+            // login 한 상태라면
             request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
-            String path = "/user/list.jsp";
-            RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-            dispatcher.forward(request,response);
-            return;
+            return "/user/list.jsp";
         }
-        response.sendRedirect("/user/login.jsp");
+        // logout 한 상태라면
+        return "redirect:/user/login.jsp"; // 로그인 패이지로 redirect
     }
 }

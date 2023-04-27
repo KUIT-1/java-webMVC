@@ -1,19 +1,17 @@
 package jwp.controller;
 
+import core.controller.Controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/update")
-public class UpdateUserController extends HttpServlet {
+public class UpdateUserController implements Controller {
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MemoryUserRepository.getInstance().updateUser(
                 new User(
                         request.getParameter("userId"),
@@ -22,7 +20,6 @@ public class UpdateUserController extends HttpServlet {
                         request.getParameter("email")
                 )
         );
-        String path = "/user/list";
-        response.sendRedirect(path);
+        return "redirect:/user/list";
     }
 }

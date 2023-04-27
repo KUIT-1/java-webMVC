@@ -1,5 +1,6 @@
 package jwp.controller;
 
+import core.controller.Controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -11,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LogInController extends HttpServlet {
+public class LogInController implements Controller {
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         String userId = request.getParameter("userId");
@@ -25,11 +26,10 @@ public class LogInController extends HttpServlet {
         User logInUser = new User(userId, password, name, email);
         User user = MemoryUserRepository.getInstance().findUserById(userId);
 
-        if (user != null && user.isSameUser(logInUser)) {
-            session.setAttribute("user", user); // 세션 정보 저장
-            response.sendRedirect("/");
-            return;
+        if (user!=null && user.isSameUser(logInUser)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
         }
-        response.sendRedirect("/user/login_failed.jsp");
+        return "redirect:/user/login_failed.jsp";
     }
 }
