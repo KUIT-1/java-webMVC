@@ -2,6 +2,7 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import jwp.model.User;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CreateUserController implements Controller {
+public class UpdateUserController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("userId"),
@@ -18,7 +19,8 @@ public class CreateUserController implements Controller {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
-        return "Redirect:/";
+        MemoryUserRepository.getInstance().changeUserInfo(user);
+
+        return "Redirect:/user/userList";
     }
 }
