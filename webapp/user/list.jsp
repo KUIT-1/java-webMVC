@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!doctype html>
@@ -69,23 +71,31 @@
             </tr>
             </thead>
             <tbody>
-            <%
-                Collection<User> users = (Collection<User>) request.getAttribute("users");
-                for (User user : users) {
-            %>
-            <tr>
-                <th class="col-md-3"><%= user.getUserId() %>
-                </th>
-                <th class="col-md-3"><%= user.getName() %>
-                </th>
-                <th class="col-md-3"><%= user.getEmail() %>
-                </th>
-                <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
+
+           <%
+               Collection<User> users = (Collection<User>) request.getAttribute("users");
+               for (User user : users) {
+                   String ID=user.getUserId();
+                   request.setAttribute("ID", ID); // Set the ID attribute in the request scope
+           %>
+
+                   <tr>
+                       <th class="col-md-3"><%= user.getUserId() %>
+                       </th>
+                       <th class="col-md-3"><%= user.getName() %>
+                       </th>
+                       <th class="col-md-3"><%= user.getEmail() %>
+                       </th>
+                       <th class="col-md-3"><a href="/user/updateForm?userId=${requestScope.ID}" class="btn btn-success" role="button">수정</a></th>
+                   </tr>
+           <%
+               }
+           %>
+           </tbody>
+
+
+
+
         </table>
     </div>
 
