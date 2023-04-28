@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko">
   <head>
-    <%@ include file="../include/header.jspf"%>
+    <%@ include file="../include/downheader.jspf"%>
   </head>
   <body>
     <%@ include file="../include/navigation.jspf"%>

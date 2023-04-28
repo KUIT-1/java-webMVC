@@ -23,7 +23,6 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String newUrl = proceed(req,resp);
         newUrl = findRedirect(newUrl);
-        newUrl = findcss(newUrl);
         if (redirect.equals("true")){
             resp.sendRedirect(newUrl);
             return;
@@ -31,14 +30,6 @@ public class DispatcherServlet extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher(newUrl);
         rd.forward(req,resp);
         return;
-    }
-
-    private String findcss(String css){
-        if(css.endsWith("css")){
-            css = css.replace("/user","");
-
-        }
-        return css;
     }
 
     private String findRedirect(String url){
@@ -57,33 +48,4 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapper.getController(url);
         return controller.execute(req, resp);
     }
-//    private core.RequestMapping requestMapping;
-//    private static final String REDIRECT_PREFIX = "redirect:";
-//
-//    @Override
-//    public void init() throws ServletException {
-//        requestMapping = new core.RequestMapping();
-//    }
-//
-//    @Override
-//    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        Controller controller = requestMapping.getController(req);
-//        try {
-//            String viewName = controller.execute(req, resp);
-//            move(viewName, req, resp);
-//        } catch (Throwable e) {
-//            throw new ServletException(e.getMessage());
-//        }
-//    }
-//
-//    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp)
-//            throws ServletException, IOException {
-//        if (viewName.startsWith(REDIRECT_PREFIX)) {
-//            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
-//            return;
-//        }
-//
-//        RequestDispatcher rd = req.getRequestDispatcher(viewName);
-//        rd.forward(req, resp);
-//    }
 }
