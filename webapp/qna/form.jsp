@@ -14,7 +14,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
@@ -49,47 +49,32 @@
                 <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
             </div>
         </header>
+    </div>
 
     <div class="container" id="main">
-        <table class="table table-striped">
-            <thead class="col-md-12">
-                <tr>
-                <th class="col-md-3">#</th>
-                <th class="col-md-3">아이디</th>
-                <th class="col-md-3">이름</th>
-                <th class="col-md-3">이메일</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th class="col-md-3">1</th>
-                <th class="col-md-3">jung-woo-kim</th>
-                <th class="col-md-3">김정우</th>
-                <th class="col-md-3">jung-woo-kim@kuit.kr</th>
-            </tr>
-            <tr>
-                <th class="col-md-3">2</th>
-                <th class="col-md-3">woookk</th>
-                <th class="col-md-3">민병욱</th>
-                <th class="col-md-3">woookk@kuit.kr</th>
-            </tr>
-            <tr>
-                <th class="col-md-3">3</th>
-                <th class="col-md-3">kkkkkkyeong</th>
-                <th class="col-md-3">정경은</th>
-                <th class="col-md-3">ro-el-c@kuit.kr</th>
-            </tr>
-            <tr>
-                <th class="col-md-3">4</th>
-                <th class="col-md-3">eunaJung01</th>
-                <th class="col-md-3">정은아</th>
-                <th class="col-md-3">eunaJung01@kuit.kr</th>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../js/scripts.js"></script>
-    </body>
+      <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
+         <div class="panel panel-default content-main">
+             <form name="question" method="post" action="">
+                 <div class="form-group">
+                     <label for="writer">글쓴이</label>
+                     <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
+                 </div>
+                 <div class="form-group">
+                     <label for="title">제목</label>
+                     <input type="text" class="form-control" id="title" name="title" placeholder="제목"/>
+                 </div>
+                 <div class="form-group">
+                     <label for="contents">내용</label>
+                     <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
+                 </div>
+                 <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">질문하기</button>
+                 <div class="clearfix" />
+             </form>
+           </div>
+       </div>
+   </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
+  </body>
 </html>

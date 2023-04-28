@@ -50,35 +50,24 @@
         </div>
       </header>
     </div>
+    <div class="container">
+      <main class="form-signin">
+        <form name="login" method="post" action="/user/login">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <div class="container" id="main">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="loginId" name="userId" placeholder="id">
+            <label for="loginId">ID</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password">
+            <label for="loginPassword">Password</label>
+          </div>
 
-        <main class="form-signin">
-
-          <form name="sign-up" method="post" action="/user/signup">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="userId" name="userId" placeholder="Id">
-              <label for="userId">User Id</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-              <label for="password">Password</label>
-            </div>
-            <div class="form-floating">
-              <input type="text" class="form-control" id="name" name="name" placeholder="name">
-              <label for="name">Name</label>
-            </div>
-            <div class="form-floating">
-              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
-              <label for="email">Email address</label>
-            </div>
-            <div style="height:10px;">
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-          </form>
-        </main>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
+      </main>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
   </body>

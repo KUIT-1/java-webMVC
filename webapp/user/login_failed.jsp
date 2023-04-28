@@ -14,7 +14,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
@@ -57,7 +57,7 @@
         </div>
         <form name="login" method="post" action="/user/login">
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-      
+
           <div class="form-floating">
             <input type="text" class="form-control" id="loginId" name="userId" placeholder="id">
             <label for="loginId">ID</label>
