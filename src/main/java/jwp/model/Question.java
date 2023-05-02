@@ -1,6 +1,7 @@
 package jwp.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Question {
 
@@ -18,6 +19,13 @@ public class Question {
         this.contents = contents;
         this.createdDate = createdDate;
         this.countOfAnswer = countOfAnswer;
+    }
+    public Question(String writer, String title, String contents) {
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
+        this.createdDate = Date.valueOf(LocalDate.now());
+        this.countOfAnswer = 0;
     }
 
     public int getQuestionId() {
