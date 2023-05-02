@@ -20,4 +20,27 @@ public class Question {
         this.countOfAnswer = countOfAnswer;
     }
 
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public int getCountOfAnswer() {
+        return countOfAnswer;
+    }
 }
