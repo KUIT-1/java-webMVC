@@ -1,7 +1,6 @@
 package jwp.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Question {
@@ -9,16 +8,22 @@ public class Question {
     private String writer;
     private String title;
     private String contents;
-    private LocalDateTime createdDate;
+    private Timestamp createdDate;
     private int countOfAnswer;
 
-    public Question(int questionId, String writer, String title, String contents, LocalDateTime createdDate, int countOfAnswer) {
+    public Question(int questionId, String writer, String title, String contents, Timestamp createdDate, int countOfAnswer) {
         this.questionId = questionId;
         this.writer = writer;
         this.title = title;
         this.contents = contents;
         this.createdDate = createdDate;
         this.countOfAnswer = countOfAnswer;
+    }
+
+    public Question(String writer, String title, String contents) {
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
     }
 
     public int getQuestionId() {
@@ -37,7 +42,7 @@ public class Question {
         return contents;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public Timestamp getCreatedDate() {
         return createdDate;
     }
 

@@ -1,6 +1,8 @@
 package core;
 
 import jwp.controller.*;
+import jwp.controller.qna.CreateQnaController;
+import jwp.controller.qna.QnaFormController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -16,6 +18,9 @@ public class RequestMapper {
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
+
+        controllers.put("/qna/create", new CreateQnaController());
+        controllers.put("/qna/form",new QnaFormController());
 
         controllers.put("/user/list", new ListUserController());
 
