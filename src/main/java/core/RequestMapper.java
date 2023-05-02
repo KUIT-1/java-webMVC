@@ -1,11 +1,9 @@
 package core;
 
 import jwp.controller.*;
-import jwp.controller.qna.CreateQnaController;
-import jwp.controller.qna.QnaFormController;
+import jwp.controller.qna.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +12,7 @@ public class RequestMapper {
 
     static {
         controllers.put("/",new HomeController());
+        controllers.put("/home", new HomeController());
 
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
@@ -21,6 +20,10 @@ public class RequestMapper {
 
         controllers.put("/qna/create", new CreateQnaController());
         controllers.put("/qna/form",new QnaFormController());
+        controllers.put("/qna/show",new ShowQnaController());
+        controllers.put("/qna/updateform",new UpdateFormQnaController());
+        controllers.put("/qna/update",new UpdateQnaController());
+        controllers.put("/qna/delete",new DeleteQnaController());
 
         controllers.put("/user/list", new ListUserController());
 

@@ -26,6 +26,12 @@ public class Question {
         this.contents = contents;
     }
 
+    public Question(int questionId, String title, String contents) {
+        this.questionId = questionId;
+        this.title = title;
+        this.contents = contents;
+    }
+
     public int getQuestionId() {
         return questionId;
     }

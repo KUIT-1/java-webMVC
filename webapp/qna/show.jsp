@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% pageContext.setAttribute("replaceChar", "\\n"); %>
 
 <!doctype html>
 <html lang="ko">
@@ -10,7 +12,7 @@
     <%@ include file="../include/navigation.jspf"%>
     <div class="container" id="main">
             <header class="qna-header">
-                <h2 class="qna-title">객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요?</h2>
+                <h2 class="qna-title">${question.title}</h2>
             </header>
             <div class="content-main">
                 <article class="article">
@@ -20,33 +22,32 @@
                         </div>
                         <div class="article-header-text">
                           <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
-                            <span class="article-author-name">김정우</span>
+                            <span class="article-author-name">${question.writer}</span>
                             <span class="article-header-time">
-                              2023-03-09 23:11
+                              ${question.createdDate}
                             </span>
                         </div>
                     </div>
                     <div class="article-doc">
-                        <p>객체지향의 특징 4가지</p>
-                        <p>추상화</p>
-                        <p>캡슐화</p>
-                        <p>상속</p>
-                        <p>다형성</p>
-                        <p> ??? </p>
+                        ${fn:replace(question.contents, replaceChar, "<br/>")}
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
-                            <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/423/form">수정</a>
-                            </li>
-                            <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/423" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="link-delete-article" type="submit">삭제</button>
-                                </form>
-                            </li>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.user and sessionScope.user.userId == question.writer}">
+                                    <li>
+                                        <!-- 수정, 삭제 API 연결 필요 -->
+                                        <a class="link-modify-article" href="/qna/updateform?questionId=${question.questionId}">수정</a>
+                                    </li>
+                                    <li>
+                                        <!-- 수정, 삭제 API 연결 필요 -->
+                                        <form class="form-delete" action="/qna/delete" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="link-delete-article" type="submit">삭제</button>
+                                        </form>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                             <li>
                                 <a class="link-modify-article" href="../home.jsp">목록</a>
                             </li>

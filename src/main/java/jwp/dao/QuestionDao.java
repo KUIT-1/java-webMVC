@@ -3,6 +3,7 @@ package jwp.dao;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.KeyHolder;
 import jwp.model.Question;
+import jwp.model.User;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -51,5 +52,14 @@ public class QuestionDao {
                         rs.getTimestamp("createdDate"),
                         rs.getInt("countOfAnswer")
                 ));
+    }
+
+    public void update(Question question) {
+        String sql = "update questions set title=?, contents=? where questionId=?";
+        jdbcTemplate.insert(sql, pstmt -> {
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents());
+            pstmt.setInt(3,question.getQuestionId());
+        });
     }
 }
