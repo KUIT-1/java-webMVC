@@ -21,8 +21,10 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException{
-        requestMapping = new RequestMapping();
-        requestMapping.init();
+        if(requestMapping == null){
+            requestMapping = new RequestMapping();
+            requestMapping.init();
+        }
     }
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
