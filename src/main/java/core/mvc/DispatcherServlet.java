@@ -1,7 +1,4 @@
-package core.dispatcherServlet;
-
-import core.controller.Controller;
-import core.requestMapping.RequestMapping;
+package core.mvc;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

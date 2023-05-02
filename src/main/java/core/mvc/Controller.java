@@ -1,4 +1,4 @@
-package core.controller;
+package core.mvc;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

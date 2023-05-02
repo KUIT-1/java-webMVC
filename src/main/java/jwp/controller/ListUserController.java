@@ -1,8 +1,8 @@
 package jwp.controller;
 
-import core.controller.Controller;
+import core.mvc.Controller;
 import core.db.MemoryUserRepository;
-import jwp.session.UserSession;
+import jwp.util.UserSessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ListUserController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(UserSession.isLogin(request.getSession())){
+        if(UserSessionUtils.isLogin(request.getSession())){
             // login 한 상태라면
             request.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";

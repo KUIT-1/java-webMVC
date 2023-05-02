@@ -1,6 +1,6 @@
 package jwp.controller;
 
-import core.controller.Controller;
+import core.mvc.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

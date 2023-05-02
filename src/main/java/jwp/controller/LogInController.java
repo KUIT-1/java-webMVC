@@ -1,12 +1,10 @@
 package jwp.controller;
 
-import core.controller.Controller;
+import core.mvc.Controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

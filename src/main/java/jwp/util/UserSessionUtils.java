@@ -1,10 +1,10 @@
-package jwp.session;
+package jwp.util;
 
 import jwp.model.User;
 
 import javax.servlet.http.HttpSession;
 
-public class UserSession {
+public class UserSessionUtils {
     static final String USER_SESSION_KEY = "user";
 
     public static User getUserFromSession(HttpSession session) {

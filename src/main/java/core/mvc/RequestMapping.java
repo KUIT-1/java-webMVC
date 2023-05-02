@@ -1,6 +1,5 @@
-package core.requestMapping;
+package core.mvc;
 
-import core.controller.Controller;
 import jwp.controller.*;
 
 import java.util.HashMap;
