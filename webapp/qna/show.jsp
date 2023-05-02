@@ -48,7 +48,7 @@
                                 </form>
                             </li>
                             <li>
-                                <a class="link-modify-article" href="../index.jsp">목록</a>
+                                <a class="link-modify-article" href="../home.jsp">목록</a>
                             </li>
                         </ul>
                     </div>

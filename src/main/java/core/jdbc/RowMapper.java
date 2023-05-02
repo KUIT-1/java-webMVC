@@ -1,4 +1,4 @@
-package core.db;
+package core.jdbc;
 
 import jwp.model.User;
 

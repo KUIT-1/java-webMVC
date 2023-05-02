@@ -1,9 +1,5 @@
-package core.db;
+package core.jdbc;
 
-import core.jdbc.ConnectionManager;
-import jwp.model.User;
-
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,9 +39,9 @@ public class JdbcTemplate<T> {
     }
 
     public List<T> query(String sql, RowMapper<T> rowMapper) {
+        System.out.println("query");
         List<T> objects = new ArrayList<>();
         try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()){
-
             while (rs.next()) {
                 T object = rowMapper.mapRow(rs);
                 objects.add(object);

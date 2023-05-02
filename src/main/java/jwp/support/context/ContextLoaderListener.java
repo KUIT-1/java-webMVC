@@ -8,6 +8,8 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 @WebListener

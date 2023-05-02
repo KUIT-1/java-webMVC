@@ -1,6 +1,6 @@
 package jwp.dao;
 
-import core.db.JdbcTemplate;
+import core.jdbc.JdbcTemplate;
 import jwp.model.User;
 
 import java.sql.SQLException;
@@ -32,9 +32,14 @@ public class UserDao {
     public List<User> findAll() {
         String sql = "SELECT * FROM USERS";
 
-        return jdbcTemplate.query(sql,
+        List<User> temp =  jdbcTemplate.query(sql,
                 rs -> new User(rs.getString("userId"), rs.getString("password"), rs.getString("name"),
                         rs.getString("email")));
+        for (User tempp:
+             temp) {
+            System.out.println(tempp);
+        }
+        return temp;
     }
 
     public User findByUserId(String userId) throws SQLException {

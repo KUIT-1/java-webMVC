@@ -172,7 +172,7 @@ public final class Updateform_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </a>\r\n");
       out.write("\r\n");
       out.write("        <ul class=\"nav col-12 col-md-auto mb-2 justify-content-center mb-md-0\">\r\n");
-      out.write("            <li><a href=\"/index.jsp\" class=\"nav-link px-2 link-secondary\">Q&A</a></li>\r\n");
+      out.write("            <li><a href=\"/home.jsp\" class=\"nav-link px-2 link-secondary\">Q&A</a></li>\r\n");
       out.write("            <li><a href=\"#\" class=\"nav-link px-2 link-dark\">FAQs</a></li>\r\n");
       out.write("            <li><a href=\"/user/list\" class=\"nav-link px-2 link-dark\">User List</a></li>\r\n");
       out.write("            <li><a href=\"#\" class=\"nav-link px-2 link-dark\">About</a></li>\r\n");

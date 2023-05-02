@@ -2,7 +2,7 @@ package core;
 
 import jwp.controller.*;
 
-import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,6 @@ public class RequestMapper {
     private static final Map<String, Controller> controllers = new HashMap<>();
 
     static {
-        controllers.put("/index.jsp", new HomeController());
         controllers.put("/",new HomeController());
 
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
@@ -30,7 +29,7 @@ public class RequestMapper {
     }
 
 
-    public Controller getController(String url){
-        return controllers.get(url);
+    public Controller getController(HttpServletRequest request) {
+        return controllers.get(request.getRequestURI());
     }
 }
