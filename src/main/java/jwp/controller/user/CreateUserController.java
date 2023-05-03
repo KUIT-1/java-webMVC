@@ -1,4 +1,4 @@
-package jwp.controller;
+package jwp.controller.user;
 
 import core.mvc.Controller;
 import jwp.dao.UserDao;
@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class UpdateUserController implements Controller {
+public class CreateUserController implements Controller {
     UserDao userDao = new UserDao();
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        userDao.update(new User(
-                req.getParameter("userId"),
+        User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
-                req.getParameter("email")));
-        return "redirect:/user/list";
+                req.getParameter("email"));
 
+        userDao.insert(user);
+        return "redirect:/user/list";
     }
 }

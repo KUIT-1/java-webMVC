@@ -1,4 +1,4 @@
-package jwp.controller;
+package jwp.controller.qna;
 
 import core.mvc.Controller;
 import jwp.dao.QuestionDao;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CreateQnaController implements Controller {
+public class QnaFormController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -18,12 +18,14 @@ public class CreateQnaController implements Controller {
             return "/user/loginForm";
         }
 
-        new QuestionDao().insert(new Question(
-                req.getParameter("writer"),
-                req.getParameter("title"),
-                req.getParameter("contents")
-        ));
+        String questionId = req.getParameter("questionId");
+        if (questionId != null) {
+            Question question = new QuestionDao().findById(Integer.parseInt(questionId));
+            req.setAttribute("question", question);
+        } else {
+            req.setAttribute("question", new Question("", "", ""));
+        }
 
-        return "redirect:/";
+        return "/qna/form.jsp";
     }
 }

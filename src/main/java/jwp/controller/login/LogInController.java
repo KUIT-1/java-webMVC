@@ -1,4 +1,4 @@
-package jwp.controller;
+package jwp.controller.login;
 
 import core.mvc.Controller;
 import jwp.dao.UserDao;
