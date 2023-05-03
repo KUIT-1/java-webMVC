@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% pageContext.setAttribute("replaceChar", "\\n"); %>
+<script src="../js/jquery-3.6.4.min.js"/>
 
 <!doctype html>
 <html lang="ko">
@@ -57,75 +58,50 @@
   
                 <div class="qna-comment">
                     <div class="qna-comment-kuit">
-                        <p class="qna-comment-count"><strong>2</strong>개의 의견</p>
+                        <p class="qna-comment-count"><strong>${fn:length(answers)}</strong>개의 의견</p>
                         <div>
-                            <article class="article" id="answer-1405">
-                                <div class="article-header">
-                                    <div class="article-header-thumb">
-                                        <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
-                                    </div>
-                                    <div class="article-header-text">
-                                        <span class="article-author-name">정경은</span>
-                                        <span class="article-header-time">
-                                           2023-03-09 23:15
+                            <c:forEach items="${answers}" var="answer">
+                                <article class="article" id="answer-${answer.answerId}">
+                                    <div class="article-header">
+                                        <div class="article-header-thumb">
+                                            <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                                        </div>
+                                        <div class="article-header-text">
+                                            <span class="article-author-name">${answer.writer}</span>
+                                            <span class="article-header-time">
+                                           ${answer.createdDate}
                                         </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="article-doc comment-doc">
-                                    <p>.</p>
-                                </div>
-                                <div class="article-util">
-                                    <ul class="article-util-list">
-                                        <li>
-                                          <!-- 수정, 삭제 API 연결 필요 -->
-                                            <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
-                                        </li>
-                                        <li>
-                                          <!-- 수정, 삭제 API 연결 필요 -->
-                                            <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="delete-answer-button">삭제</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                            <article class="article" id="answer-1406">
-                                <div class="article-header">
-                                    <div class="article-header-thumb">
-                                        <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
+                                    <div class="article-doc comment-doc">
+                                        <p>${fn:replace(answer.contents, replaceChar, "<br/>")}</p>
                                     </div>
-                                    <div class="article-header-text">
-                                        <span class="article-author-name">정은아</span>
-                                        <span class="article-header-time">
-                                          2023-03-09 23:20
-                                        </span>
+                                    <div class="article-util">
+                                        <ul class="article-util-list">
+                                            <li>
+                                                <!-- 수정, 삭제 API 연결 필요 -->
+                                                <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
+                                            </li>
+                                            <li>
+                                                <!-- 수정, 삭제 API 연결 필요 -->
+                                                <form class="delete-answer-form" action="/questions/${question.questionId}/answers/${answer.answerId}" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="delete-answer-button">삭제</button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="article-doc comment-doc">
-                                    <p>nuclear busy girl</p>
-                                </div>
-                                <div class="article-util">
-                                    <ul class="article-util-list">
-                                        <li>
-                                          <!-- 수정, 삭제 API 연결 필요 -->
-                                            <a class="link-modify-article" href="/questions/1/answers/2/form">수정</a>
-                                        </li>
-                                        <li>
-                                          <!-- 수정, 삭제 API 연결 필요 -->
-                                            <form class="form-delete" action="/questions/1/answers/2" method="POST">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="delete-answer-button">삭제</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
+                                </article>
+                            </c:forEach>
                             <form class="submit-write">
-                                <div class="form-group" style="padding:14px;">
-                                    <textarea class="form-control" placeholder="Update your status"></textarea>
+                                <input type="hidden" name="questionId" value="${question.questionId}">
+                                <div class="form-group col-lg-4" style="padding-top:10px;">
+                                    <input class="form-control" id="writer" name="writer" placeholder="이름">
                                 </div>
-                                <button class="btn btn-primary pull-right" type="button">답변하기</button>
+                                <div class="form-group col-lg-12">
+                                    <textarea name="contents" id="contents" class="form-control" placeholder=""></textarea>
+                                </div>
+                                <input class="btn btn-success pull-right" type="submit" value="답변하기" />
                                 <div class="clearfix" />
                             </form>
                         </div>
@@ -135,6 +111,36 @@
           </div>
       </div>
     </div>
+
+    <script type="text/template" id="answerTemplate">
+        <article class="article">
+            <div class="article-header">
+                <div class="article-header-thumb">
+                    <img src="/img/picture.jpeg" class="article-author-thumb" alt="">
+                </div>
+                <div class="article-header-text">
+                    {0}
+                    <div class="article-header-time">{1}</div>
+                </div>
+            </div>
+            <div class="article-doc comment-doc">
+                {2}
+            </div>
+            <div class="article-util">
+                <ul class="article-util-list">
+                    <li>
+                        <a class="link-modify-article" href="/api/qna/updateAnswer/{3}">수정</a>
+                    </li>
+                    <li>
+                        <form class="form-delete" action="/api/qna/deleteAnswer" method="POST">
+                            <input type="hidden" name="answerId" value="{4}"/>
+                            <button type="submit" class="link-delete-article">삭제</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>

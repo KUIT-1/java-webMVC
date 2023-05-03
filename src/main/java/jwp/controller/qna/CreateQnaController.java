@@ -19,9 +19,6 @@ public class CreateQnaController implements Controller {
                 req.getParameter("title"),
                 req.getParameter("contents"));
 
-        System.out.println("infomation : ");
-        System.out.println(question.toString());
-
         try {
             Question returnQ = questionDao.insert(question);
             System.out.println(returnQ.toString());

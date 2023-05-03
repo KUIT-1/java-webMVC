@@ -51,7 +51,6 @@ public class JdbcTemplate<T> {
     }
 
     public List<T> query(String sql, RowMapper<T> rowMapper) {
-        System.out.println("query");
         List<T> objects = new ArrayList<>();
         try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()){
             while (rs.next()) {
@@ -60,6 +59,25 @@ public class JdbcTemplate<T> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        return objects;
+    }
+
+    public List<T> query(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper) throws SQLException {
+        ResultSet rs = null;
+        List<T> objects = new ArrayList<>();
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)){
+            pstmtSetter.setValues(pstmt);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                T object = rowMapper.mapRow(rs);
+                objects.add(object);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if(rs!=null)
+                rs.close();
         }
         return objects;
     }

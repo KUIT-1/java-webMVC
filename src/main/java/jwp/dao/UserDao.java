@@ -35,10 +35,6 @@ public class UserDao {
         List<User> temp =  jdbcTemplate.query(sql,
                 rs -> new User(rs.getString("userId"), rs.getString("password"), rs.getString("name"),
                         rs.getString("email")));
-        for (User tempp:
-             temp) {
-            System.out.println(tempp);
-        }
         return temp;
     }
 
