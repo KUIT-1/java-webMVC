@@ -51,4 +51,10 @@ public class Question {
     public int getCountOfAnswer() {
         return countOfAnswer;
     }
+
+    public void update(String writer, String title, String contents) {
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
+    }
 }
