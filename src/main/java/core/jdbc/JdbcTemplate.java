@@ -1,6 +1,5 @@
 package core.jdbc;
 
-import jwp.model.User;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import java.sql.Connection;
@@ -19,14 +18,36 @@ public class JdbcTemplate {
         }
     }
 
-    public List<User> findAll(String sql, RowMapper rowMapper) throws SQLException {
-        List<User> users = new ArrayList<>();
+    //Generic 형변환
+    //User외의 다른 값이 들어오면 자동으로 T로 변환해줌
+    public <T> List<T> query(String sql, RowMapper rowMapper) throws SQLException {
+        List<T> objects = new ArrayList<>();
         try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
-                User user = rowMapper.mapRow(rs);
-                users.add(user);
+                T t = (T) rowMapper.mapRow(rs);
+                objects.add(t);
             }
         }
-        return users;
+        return objects;
+    }
+
+    public <T> T queryForObject(String sql, RowMapper rowMapper, PreparedStatementSetter pstmtSetter) throws SQLException {
+
+
+        ResultSet rs = null;
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+            pstmtSetter.setValues(pstmt);
+
+            rs = pstmt.executeQuery();
+
+            T t = null;
+            if (rs.next()) {
+                t = (T) rowMapper.mapRow(rs);
+            }
+
+            return t;
+        } finally {
+            if (rs != null) rs.close();
+        }
     }
 }
