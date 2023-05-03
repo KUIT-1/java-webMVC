@@ -18,14 +18,12 @@ public class CreateQnaController implements Controller {
             return "/user/loginForm";
         }
 
-        Question question = new QuestionDao().insert(new Question(
+        new QuestionDao().insert(new Question(
                 req.getParameter("writer"),
                 req.getParameter("title"),
                 req.getParameter("contents")
         ));
 
-        req.setAttribute("question", question);
-
-        return "redirect:/qna/show";
+        return "redirect:/";
     }
 }
