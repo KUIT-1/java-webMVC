@@ -25,6 +25,15 @@ public class QuestionDao {
         return findById(keyHolder.getId());
     }
 
+    public void update(Question q) {
+        String sql = "UPDATE QUESTIONS set title=?, contents=? WHERE questionId=?";
+        jdbcTemplate.update(sql, pstmt -> {
+            pstmt.setString(1, q.getTitle());
+            pstmt.setString(2, q.getContents());
+            pstmt.setInt(3, q.getQuestionId());
+        });
+    }
+
     public List<Question> findAll() {
         String sql = "SELECT * FROM QUESTIONS";
 
