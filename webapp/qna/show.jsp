@@ -35,11 +35,11 @@
                         <c:when test="${not empty sessionScope.user}">
                             <li>
                                 <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/${question.questionId}/form">수정</a>
+                                <a class="link-modify-article" href="/qna/form?questionId=${question.questionId}">수정</a>
                             </li>
                             <li>
                                 <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/${question.questionId}" method="POST">
+                                <form class="form-delete" action="/qna/${question.questionId}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="link-delete-article" type="submit">삭제</button>
                                 </form>
