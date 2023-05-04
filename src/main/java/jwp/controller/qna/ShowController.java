@@ -12,7 +12,7 @@ public class ShowController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String questionId = req.getParameter("questionId");
-        Question question = questionDao.findByQuestionId(questionId);
+        Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
 
         req.setAttribute("question", question);
 

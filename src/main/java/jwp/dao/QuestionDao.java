@@ -1,10 +1,8 @@
 package jwp.dao;
 
 import core.jdbc.JdbcTemplate;
+import core.jdbc.KeyHolder;
 import jwp.model.Question;
-import jwp.model.User;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +23,7 @@ public class QuestionDao {
                         rs.getInt("countOfAnswer")));
     }
 
-    public Question findByQuestionId(String questionId) throws SQLException {
+    public Question findByQuestionId(int questionId) throws SQLException {
         String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?";
         return jdbcTemplate.queryForObject(sql,
                 rs-> new Question(
@@ -35,19 +33,22 @@ public class QuestionDao {
                         rs.getString("contents"),
                         rs.getDate("createdDate"),
                         rs.getInt("countOfAnswer")),
-                pstmt -> pstmt.setString(1, questionId));
+                pstmt -> pstmt.setInt(1, questionId));
     }
 
-    public void insert(Question question) throws SQLException {
+    public Question insert(Question question) throws SQLException {
         String sql = "INSERT INTO QUESTIONS " +
                 "(writer, title, contents, createdDate) " +
                 " VALUES (?, ?, ?, ?)";
+        KeyHolder keyHolder = new KeyHolder();
         jdbcTemplate.update(sql,
                 pstmt -> {
                     pstmt.setString(1, question.getWriter());
                     pstmt.setString(2,question.getTitle());
                     pstmt.setString(3,question.getContents());
                     pstmt.setObject(4,question.getCreatedDate());
-                });
+                },
+                keyHolder);
+        return findByQuestionId(keyHolder.getId());
     }
 }
