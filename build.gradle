@@ -36,6 +36,8 @@ dependencies {
     runtimeOnly("com.h2database:h2:2.1.214")
     runtimeOnly('mysql:mysql-connector-java:8.0.28')
 
+    compileOnly('javax.servlet:jstl:1.2')
+
     implementation("org.apache.tomcat.embed:tomcat-embed-core:$tomcatVersion")
     implementation("org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2")
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper:$tomcatVersion")

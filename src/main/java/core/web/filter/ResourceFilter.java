@@ -36,7 +36,7 @@ public class ResourceFilter implements Filter {
         String path = req.getRequestURI().substring(req.getContextPath().length());
         if (isResourceUrl(path)) {
             logger.log(Level.INFO, "path: "+ path);
-            defaultRequestDispatcher.forward(request, response);
+            defaultRequestDispatcher.forward(request, response); // 정적인 요청이 들어오면 default request dispatcher 가 처리함.
         } else {
             chain.doFilter(request, response);
         }

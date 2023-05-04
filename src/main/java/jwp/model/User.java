@@ -39,7 +39,6 @@ public class User {
         if (password == null) {
             return false;
         }
-
         return this.password.equals(password);
     }
 
