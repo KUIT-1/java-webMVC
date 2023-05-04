@@ -6,11 +6,11 @@ import jwp.model.User;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserDao { // Data Access Object
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+public class UserDao {
+    private JdbcTemplate<User> jdbcTemplate = new JdbcTemplate<>();
 
     public void insert(User user) throws SQLException {
-        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO USERS(userId, password, name, email) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(sql, pstmt -> {
             pstmt.setString(1, user.getUserId());
