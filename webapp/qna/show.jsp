@@ -1,3 +1,4 @@
+<%@ page import="java.nio.file.attribute.UserPrincipal" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -32,7 +33,9 @@
             <div class="article-util">
                 <ul class="article-util-list">
                     <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
+                    <c:when test="${not empty sessionScope.user}">
+                        <c:choose>
+                        <c:when test="${sessionScope.user.name == question.writer}">
                             <li>
                                 <!-- 수정, 삭제 API 연결 필요 -->
                                 <a class="link-modify-article" href="/qna/form?questionId=${question.questionId}">수정</a>
@@ -45,6 +48,8 @@
                                 </form>
                             </li>
                         </c:when>
+                        </c:choose>
+                    </c:when>
                     </c:choose>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
