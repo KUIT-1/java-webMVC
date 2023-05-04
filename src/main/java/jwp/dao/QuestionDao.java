@@ -51,4 +51,20 @@ public class QuestionDao {
                 keyHolder);
         return findByQuestionId(keyHolder.getId());
     }
+
+    public void update(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET title=?, contents=? where questionId=?";
+        jdbcTemplate.update(sql, pstmt -> {
+            pstmt.setInt(3, question.getQuestionId());
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents());
+        });
+    }
+
+    public void delete(Question question) throws SQLException{
+        String sql = "DELETE FROM QUESTIONS WHERE questionId=?";
+        jdbcTemplate.update(sql, pstmt -> {
+            pstmt.setInt(1, question.getQuestionId());
+        });
+    }
 }

@@ -29,7 +29,6 @@ public class Question {
         this.createdDate = Date.valueOf(LocalDate.now());
         this.countOfAnswer = 0;
     }
-
     public int getQuestionId() {
         return questionId;
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class JdbcTemplate {
+
     public void update(String sql, PreparedStatementSetter pstmtSetter) throws SQLException {
         try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmtSetter.setValues(pstmt);
