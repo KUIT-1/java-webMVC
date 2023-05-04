@@ -3,6 +3,8 @@ package jwp.dao;
 import core.jdbc.JdbcTemplate;
 import jwp.model.Question;
 import jwp.model.User;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,5 +36,18 @@ public class QuestionDao {
                         rs.getDate("createdDate"),
                         rs.getInt("countOfAnswer")),
                 pstmt -> pstmt.setString(1, questionId));
+    }
+
+    public void insert(Question question) throws SQLException {
+        String sql = "INSERT INTO QUESTIONS " +
+                "(writer, title, contents, createdDate) " +
+                " VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                pstmt -> {
+                    pstmt.setString(1, question.getWriter());
+                    pstmt.setString(2,question.getTitle());
+                    pstmt.setString(3,question.getContents());
+                    pstmt.setObject(4,question.getCreatedDate());
+                });
     }
 }
