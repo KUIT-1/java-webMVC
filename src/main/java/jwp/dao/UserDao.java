@@ -1,6 +1,7 @@
 package jwp.dao;
 
 import core.jdbc.ConnectionManager;
+import core.jdbc.JdbcTemplate;
 import jwp.model.User;
 
 import java.sql.Connection;
@@ -13,53 +14,26 @@ import java.util.List;
 // Data access object
 public class UserDao {
 
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+
     public void insert(User user) throws SQLException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
-            pstmt = con.prepareStatement(sql);
+        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, pstmt -> {
             pstmt.setString(1, user.getUserId());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getEmail());
-
-            pstmt.executeUpdate();
-        } finally {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-
-            if (con != null) {
-                con.close();
-            }
-        }
+        });
     }
 
     public void update(User user) throws SQLException {
-        // TODO 구현 필요함.
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "update users set password=?, name=?, email=? where userId=?";
-            pstmt = con.prepareStatement(sql);
+        String sql = "update users set password=?, name=?, email=? where userId=?";
+        jdbcTemplate.update(sql, pstmt -> {
             pstmt.setString(1, user.getPassword());
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getUserId());
-
-            pstmt.executeUpdate();
-        } finally {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-
-            if (con != null) {
-                con.close();
-            }
-        }
+        });
     }
 
     public List<User> findAll() throws SQLException {
