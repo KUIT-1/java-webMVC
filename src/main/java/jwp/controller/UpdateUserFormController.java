@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class CreateUserController implements Controller {
+public class UpdateUserFormController implements Controller {
+
     UserDao userDao = new UserDao();
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
-
-        userDao.insert(user);
-        return "redirect:/user/list";
+        String userId = req.getParameter("userId");
+        User user = userDao.findByUserId(userId);
+        if (user != null) {
+            req.setAttribute("user",user);
+            return "/user/updateForm.jsp";
+        }
+        return "redirect:/";
     }
 }
