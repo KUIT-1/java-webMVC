@@ -3,10 +3,7 @@ package core.mvc;
 import jwp.controller.*;
 import jwp.controller.login.LogInController;
 import jwp.controller.login.LogOutController;
-import jwp.controller.qna.CreateQnaController;
-import jwp.controller.qna.QnaFormController;
-import jwp.controller.qna.ShowQnaController;
-import jwp.controller.qna.UpdateQnaController;
+import jwp.controller.qna.*;
 import jwp.controller.user.CreateUserController;
 import jwp.controller.user.ListUserController;
 import jwp.controller.user.UpdateUserController;
@@ -33,6 +30,7 @@ public class RequestMapping {
         controllers.put("/qna/create", new CreateQnaController());
         controllers.put("/qna/update", new UpdateQnaController());
         controllers.put("/qna/show", new ShowQnaController());
+        controllers.put("/api/qna/addAnswer", new CreateAnswerController());
 
 
         controllers.put("/user/list", new ListUserController());

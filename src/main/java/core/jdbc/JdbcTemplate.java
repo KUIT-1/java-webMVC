@@ -1,9 +1,6 @@
 package core.jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class JdbcTemplate<T> {
     }
 
     public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder keyHolder) {
-        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmtSetter.setValues(pstmt);
 
             pstmt.executeUpdate();
@@ -64,6 +61,30 @@ public class JdbcTemplate<T> {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        return objects;
+    }
+
+    public List<T> query(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper){
+        List<T> objects = new ArrayList<>();
+        ResultSet rs = null;
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmtSetter.setValues(pstmt);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                T object = rowMapper.mapRow(rs);
+                objects.add(object);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return objects;
     }
