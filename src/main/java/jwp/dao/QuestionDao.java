@@ -22,4 +22,17 @@ public class QuestionDao {
                         rs.getDate("createdDate"),
                         rs.getInt("countOfAnswer")));
     }
+
+    public Question findByQuestionId(String questionId) throws SQLException {
+        String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?";
+        return jdbcTemplate.queryForObject(sql,
+                rs-> new Question(
+                        rs.getInt("questionId"),
+                        rs.getString("writer"),
+                        rs.getString("title"),
+                        rs.getString("contents"),
+                        rs.getDate("createdDate"),
+                        rs.getInt("countOfAnswer")),
+                pstmt -> pstmt.setString(1, questionId));
+    }
 }

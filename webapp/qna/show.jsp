@@ -7,10 +7,10 @@
 <%@ include file="/include/header.jspf"%>
 <body>
 <%@ include file="/include/navigation.jspf" %>
-
+    <c:set var="question" value="${question}"/>
     <div class="container" id="main">
             <header class="qna-header">
-                <h2 class="qna-title">객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요?</h2>
+                <h2 class="qna-title">${question.title}</h2>
             </header>
             <div class="content-main">
                 <article class="article">
@@ -20,19 +20,14 @@
                         </div>
                         <div class="article-header-text">
                           <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
-                            <span class="article-author-name">김정우</span>
+                            <span class="article-author-name">${question.writer}</span>
                             <span class="article-header-time">
-                              2023-03-09 23:11
+                                ${question.createdDate}
                             </span>
                         </div>
                     </div>
                     <div class="article-doc">
-                        <p>객체지향의 특징 4가지</p>
-                        <p>추상화</p>
-                        <p>캡슐화</p>
-                        <p>상속</p>
-                        <p>다형성</p>
-                        <p> ??? </p>
+                        ${question.contents}
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
