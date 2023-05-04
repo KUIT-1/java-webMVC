@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class ContextLoaderListener implements ServletContextListener {
     private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
+    // jwp.sql의 sql문들을 이용하여 db를 초기화
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

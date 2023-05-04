@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionManager {
+    // h2 : build.gradle의 dependency에 추가해놔서 사용 가능
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_URL = "jdbc:h2:~/jwp-basic";
     private static final String DB_USERNAME = "sa";
