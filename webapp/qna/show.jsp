@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="article-doc">
-                        ${question.contents}
+                        ${question.getContents()}
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">

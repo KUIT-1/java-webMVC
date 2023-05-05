@@ -29,9 +29,13 @@ public class UpdateQuestionFromController implements Controller {
         Question question = questionDao.findByQuestionId(questionId);
 
         Optional<User> user = Optional.ofNullable(UserSessionUtils.getUserFromSession(session));
-        user.filter(question::isSameUser)
-                .orElseThrow(IllegalArgumentException::new);
-        request.setAttribute("question", question);
+        try {
+            user.filter(question::isSameUser)
+                    .orElseThrow(IllegalArgumentException::new);
+            request.setAttribute("question", question);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/";
+        }
         return "/qna/updateForm.jsp";
     }
 }

@@ -28,11 +28,14 @@ public class UpdateQuestionController implements Controller {
         Question question = questionDao.findByQuestionId(questionId);
 
         Optional<User> user = Optional.ofNullable(UserSessionUtils.getUserFromSession(session));
-        user.filter(question::isSameUser)
-                .orElseThrow(IllegalArgumentException::new);
-
-        question.update(request.getParameter("title"), request.getParameter("contents"));
-        questionDao.update(question);
+        try {
+            user.filter(question::isSameUser)
+                    .orElseThrow(IllegalArgumentException::new);
+            question.update(request.getParameter("title"), request.getParameter("contents"));
+            questionDao.update(question);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/";
+        }
         return "redirect:/";
     }
 }
