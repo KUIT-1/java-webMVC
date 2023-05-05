@@ -18,7 +18,12 @@ public class CreateUserController implements Controller {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
+<<<<<<< HEAD
         userDao.insert(user);
         return "redirect:/user/list";
+=======
+        MemoryUserRepository.getInstance().addUser(user);
+        resp.sendRedirect("/user/list");
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
     }
 }

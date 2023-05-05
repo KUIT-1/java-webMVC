@@ -1,12 +1,18 @@
+<<<<<<< HEAD
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+=======
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
 <!doctype html>
 <html lang="ko">
 <%@ include file="/include/header.jspf"%>
 <body>
 <%@ include file="/include/navigation.jspf" %>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
     <div class="container" id="main">
 
         <main class="form-signin">

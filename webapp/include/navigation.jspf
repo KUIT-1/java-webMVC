@@ -43,10 +43,18 @@
                 <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary" >개인정보수정</a>
             </c:when>
             <c:otherwise>
+<<<<<<< HEAD
                 <a href="/user/loginForm" type="button" class="btn btn-outline-primary me-2">Log-In</a>
                 <a href="/user/form" type="button" class="btn btn-primary">Sign-up</a>
             </c:otherwise>
             </c:choose>
+=======
+                <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
+            </c:otherwise>
+            </c:choose>
+
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
         </div>
     </header>
 </div>

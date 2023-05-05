@@ -7,5 +7,10 @@
 out
 gen
 .DS_Store
+<<<<<<< HEAD
 build
 .gradle
+=======
+.gradle
+build
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
