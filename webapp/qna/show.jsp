@@ -32,24 +32,20 @@
 
             <div class="article-util">
                 <ul class="article-util-list">
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
-                            <c:choose>
-                                <c:when test="${sessionScope.user.name == question.writer}">
-                                    <li>
-                                        <!-- 수정, 삭제 API 연결 필요 -->
-                                        <a class="link-modify-article"
-                                           href="/qna/form?questionId=${question.questionId}">수정</a>
-                                    </li>
-                                    <li>
-                                        <!-- 수정, 삭제 API 연결 필요 -->
-                                        <a class="link-modify-article"
-                                           href="/qna/delete?questionId=${question.questionId}">삭제</a>
-                                    </li>
-                                </c:when>
-                            </c:choose>
-                        </c:when>
-                    </c:choose>
+                    <c:if test="${not empty sessionScope.user}">
+                        <c:if test="${sessionScope.user.name == question.writer}">
+                            <li>
+                                <!-- 수정, 삭제 API 연결 필요 -->
+                                <a class="link-modify-article"
+                                   href="/qna/form?questionId=${question.questionId}">수정</a>
+                            </li>
+                            <li>
+                                <!-- 수정, 삭제 API 연결 필요 -->
+                                <a class="link-modify-article"
+                                   href="/qna/delete?questionId=${question.questionId}">삭제</a>
+                            </li>
+                        </c:if>
+                    </c:if>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
                     </li>
@@ -101,7 +97,7 @@
                         <form class="submit-write">
                             <input type="hidden" name="questionId" value="${question.questionId}">
                             <div class="form-group col-lg-4" style="padding-top:10px;">
-                                <input class="form-control" id="writer" name="writer" placeholder="이름">
+                                <input class="form-control" id="writer" name="writer" placeholder="이름" value="${sessionScope.user.name}" readonly>
                             </div>
                             <div class="form-group col-lg-12">
                                 <textarea name="contents" id="contents" class="form-control" placeholder=""></textarea>

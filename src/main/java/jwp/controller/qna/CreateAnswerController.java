@@ -20,7 +20,6 @@ public class CreateAnswerController implements Controller {
         Answer answer = new Answer(Integer.parseInt(req.getParameter("questionId")), req.getParameter("writer"), req.getParameter("contents"));
 
         Answer savedAnswer = answerDao.insert(answer);
-        System.out.println("savedAnswer.getAnswerId() = " + savedAnswer.getAnswerId());
 
         Question question = questionDao.findById(answer.getQuestionId());
         question.increaseCountOfAnswer();
