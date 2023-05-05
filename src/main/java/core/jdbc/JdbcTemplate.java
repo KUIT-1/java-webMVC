@@ -1,5 +1,7 @@
 package core.jdbc;
 
+import jwp.model.Answer;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +17,10 @@ public class JdbcTemplate {
     }
 
     public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder) {
+
         try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmtSetter.setValues(pstmt);
             pstmt.executeUpdate();
-
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 holder.setId((int) rs.getLong(1));
@@ -35,6 +37,26 @@ public class JdbcTemplate {
             while (rs.next()) {
                 T object = rowMapper.mapRow(rs);
                 objects.add(object);
+            }
+        }
+        return objects;
+    }
+
+    public <T> List<T> query(String sql, RowMapper<T> rowMapper, PreparedStatementSetter pstmtSetter) throws SQLException {
+        List<T> objects = new ArrayList<>();
+        ResultSet rs = null;
+
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmtSetter.setValues(pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                T object = rowMapper.mapRow(rs);
+                objects.add(object);
+            }
+        }finally {
+            if (rs != null) {
+                rs.close();
             }
         }
         return objects;
@@ -60,4 +82,5 @@ public class JdbcTemplate {
             }
         }
     }
+
 }

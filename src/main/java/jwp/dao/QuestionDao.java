@@ -67,4 +67,13 @@ public class QuestionDao {
             pstmt.setInt(1, question.getQuestionId());
         });
     }
+
+    public void updateCountOfAnswer(Question question) throws SQLException {
+//        question.increaseCountOfAnswer();
+        String sql = "UPDATE QUESTIONS SET countOfAnswer=? where questionId=?";
+        jdbcTemplate.update(sql, pstmt -> {
+            pstmt.setInt(1, question.getCountOfAnswer());
+            pstmt.setInt(2, question.getQuestionId());
+        });
+    }
 }
