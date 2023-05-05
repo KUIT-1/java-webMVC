@@ -20,6 +20,13 @@ public class Question {
         this.countOfAnswer = countOfAnswer;
     }
 
+    public Question(String writer, String title, String contents,int countOfAnswer) {
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
+        this.countOfAnswer = countOfAnswer;
+    }
+
     public int getQuestionId() {
         return questionId;
     }

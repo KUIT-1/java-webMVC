@@ -1,6 +1,7 @@
 package core.mvc;
 
 import jwp.controller.*;
+import jwp.controller.qna.CreateQuestionController;
 import jwp.controller.qna.FormController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class RequestMapping {
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 //        controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
         controllers.put("/qna/form", new FormController());
+        controllers.put("/qna/create", new CreateQuestionController());
         controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
 
 
