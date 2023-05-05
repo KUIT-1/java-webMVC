@@ -24,6 +24,7 @@ public class RequestMapper {
         controllers.put("/qna/updateform",new UpdateFormQnaController());
         controllers.put("/qna/update",new UpdateQnaController());
         controllers.put("/qna/delete",new DeleteQnaController());
+        controllers.put("/api/qna/addAnswer",new AddAnswerController());
 
         controllers.put("/user/list", new ListUserController());
 

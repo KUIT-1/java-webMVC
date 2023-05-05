@@ -30,6 +30,7 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapping.getController(req);
         try {
             String viewName = controller.execute(req, resp);
+            if(viewName == null) return;
             move(viewName, req, resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());

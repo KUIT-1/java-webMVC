@@ -80,4 +80,8 @@ public class Question {
                 ", countOfAnswer=" + countOfAnswer +
                 '}';
     }
+
+    public void increaseCountOfAnswer() {
+        countOfAnswer++;
+    }
 }

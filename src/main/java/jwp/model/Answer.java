@@ -10,6 +10,12 @@ public class Answer {
     private Timestamp createdDate;
     private int questionId;
 
+    public Answer(int questionId, String writer, String contents) {
+        this.questionId = questionId;
+        this.writer = writer;
+        this.contents = contents;
+    }
+
     public Answer(int answerId, String writer, String contents, Timestamp createdDate, int questionId) {
         this.answerId = answerId;
         this.writer = writer;
