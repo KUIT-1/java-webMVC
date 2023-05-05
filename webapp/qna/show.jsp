@@ -30,15 +30,14 @@
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
-
-                            <c:if test="${not empty sessionScope.user}">
+                            <c:if test="${sessionScope.user != null && question.isSameUser(sessionScope.user)}">
                                 <li>
                                     <a class="link-modify-article" href="/qna/updateForm?questionId=${question.getQuestionId()}">수정</a>
                                 </li>
+                                <li>
+                                    <a class="link-modify-article" href="/qna/delete?questionId=${question.getQuestionId()}">삭제</a>
+                                </li>
                             </c:if>
-                            <li>
-                                <a class="link-modify-article" href="/qna/delete?questionId=${question.getQuestionId()}">삭제</a>
-                            </li>
                             <li>
                                 <a class="link-modify-article" href="/">목록</a>
                             </li>
