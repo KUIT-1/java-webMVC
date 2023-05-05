@@ -13,7 +13,7 @@
             <form name="question" method="post" action="">
                 <div class="form-group">
                     <label for="writer">글쓴이</label>
-                    <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
+                    <input class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이"/>
                 </div>
                 <div class="form-group">
                     <label for="title">제목</label>
@@ -23,7 +23,7 @@
                     <label for="contents">내용</label>
                     <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">질문하기</button>
+                <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;" formaction="/qna/create">질문하기</button>
                 <div class="clearfix" />
             </form>
         </div>
