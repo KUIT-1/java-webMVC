@@ -4,13 +4,13 @@
 <!doctype html>
 <html lang="ko">
 <%@ include file="/include/header.jspf"%>
-  <body>
-  <%@ include file="/include/navigation.jspf" %>
+<body>
+<%@ include file="/include/navigation.jspf" %>
+
     <div class="container" id="main">
 
         <main class="form-signin">
-
-          <form name="sign-up" method="post" action="/user/update">
+          <form name="update" method="post" action="/user/update">
             <div class="form-floating">
               <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId" placeholder="Id" readonly>
               <label for="userId">User Id</label>
@@ -29,7 +29,7 @@
             </div>
             <div style="height:10px;">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">개인 정보 수정</button>
           </form>
         </main>
     </div>

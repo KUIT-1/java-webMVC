@@ -70,4 +70,12 @@ public class Question {
         return getCountOfAnswer() == question.getCountOfAnswer() && Objects.equals(getWriter(), question.getWriter()) && Objects.equals(getTitle(), question.getTitle()) && Objects.equals(getContents(), question.getContents());
     }
 
+    public boolean isSameUser(User user){
+        return writer.equals(user.getUserId());
+    }
+
+    public void update(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
 }

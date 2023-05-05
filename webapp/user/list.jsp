@@ -9,20 +9,20 @@
 <body>
 <%@ include file="/include/navigation.jspf" %>
 
-<div class="container" id="main">
-    <table class="table table-striped">
-        <thead class="col-md-12">
-        <tr>
-            <th class="col-md-3">아이디</th>
-            <th class="col-md-3">이름</th>
-            <th class="col-md-3">이메일</th>
-            <th class="col-md-3">#</th>
+    <div class="container" id="main">
+        <table class="table table-striped">
+            <thead class="col-md-12">
+            <tr>
+                <th class="col-md-3">아이디</th>
+                <th class="col-md-3">이름</th>
+                <th class="col-md-3">이메일</th>
+                <th class="col-md-3">#</th>
 
-        </tr>
-        </thead>
-        <tbody>
+            </tr>
+            </thead>
+            <tbody>
 
-        <c:forEach items="${users}" var="user">
+            <c:forEach items="${users}" var="user">
             <tr>
                 <th class="col-md-3">${user.userId}
                 </th>
@@ -32,12 +32,12 @@
                 </th>
                 <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/scripts.js"></script>
 </body>
 </html>

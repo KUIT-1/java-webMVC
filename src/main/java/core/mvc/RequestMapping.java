@@ -1,9 +1,7 @@
 package core.mvc;
 
 import jwp.controller.*;
-import jwp.controller.questions.CreateQuestionController;
-import jwp.controller.questions.FormQuestionController;
-import jwp.controller.questions.ShowQuestionController;
+import jwp.controller.questions.*;
 import jwp.controller.user.*;
 
 import java.util.HashMap;
@@ -30,6 +28,8 @@ public class RequestMapping {
         mapper.put("/qna/form", new FormQuestionController());
         mapper.put("/qna/create", new CreateQuestionController());
         mapper.put("/qna/show", new ShowQuestionController());
+        mapper.put("/qna/update", new UpdateQuestionController());
+        mapper.put("/qna/updateForm", new UpdateQuestionFromController());
 
         // TODO:
         // Question Controller 마저 구현하기 + crud + user 자기 계정 아닌데 수정 가능함.. 이거 수정하기

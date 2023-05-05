@@ -17,6 +17,6 @@ public class HomeController implements Controller{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         List<Question> questions = questionDao.findAll();
         request.setAttribute("questions", questions);
-        return "redirect:/home.jsp";
+        return "/home.jsp";
     }
 }
