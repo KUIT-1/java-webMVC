@@ -1,18 +1,23 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
-import jwp.dao.UserDao;
+import jwp.model.Answer;
 import jwp.model.Question;
 import jwp.model.User;
+import jwp.support.context.ContextLoaderListener;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.logging.Logger;
 
 public class QnaShowController implements Controller {
     QuestionDao questionDao = new QuestionDao();
+    AnswerDao answerDao = new AnswerDao();
+    private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -21,11 +26,16 @@ public class QnaShowController implements Controller {
 
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Question question = questionDao.findByQuestionId(questionId);
+
         if (question != null){
             req.setAttribute("loginUser", user);
             req.setAttribute("question", question);
+            req.setAttribute("answers", answerDao.findAllByquestionId(questionId));
+            logger.info(answerDao.findAllByquestionId(questionId).toString());
+            logger.info(req.getParameter("questionId"));
             return "/qna/show.jsp";
         }
+
         return "redirect:/";
     }
 }

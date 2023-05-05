@@ -3,13 +3,10 @@ package jwp.controller.qna;
 import core.mvc.Controller;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
-import jwp.model.User;
 import jwp.support.context.ContextLoaderListener;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Logger;
 
 public class QnaCreateController implements Controller {

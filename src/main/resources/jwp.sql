@@ -29,7 +29,7 @@ CREATE TABLE ANSWERS (
                          answerId 			bigint				auto_increment,
                          writer				varchar(30)			NOT NULL,
                          contents			varchar(5000)		NOT NULL,
-                         createdDate			timestamp			NOT NULL,
+                         createdDate			timestamp			NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          questionId			bigint				NOT NULL,
                          PRIMARY KEY         (answerId)
 );

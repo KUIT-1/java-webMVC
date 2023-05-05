@@ -40,6 +40,21 @@ public class JdbcTemplate {
         return objects;
     }
 
+    public <T> List<T> query(String sql, RowMapper<T> rowMapper, PreparedStatementSetter pstmtSetter) throws SQLException {
+        // TODO 구현 필요함.
+        List<T> objects = new ArrayList<>();
+        try (Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmtSetter.setValues(pstmt);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                T object = rowMapper.mapRow(rs);
+                objects.add(object);
+            }
+        }
+        return objects;
+    }
+
     public <T> T queryForObject(String sql, RowMapper<T> rowMapper, PreparedStatementSetter pstmtSetter) throws SQLException {
         ResultSet rs = null;
         try(Connection con = ConnectionManager.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {

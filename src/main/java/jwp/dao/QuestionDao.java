@@ -3,7 +3,6 @@ package jwp.dao;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.KeyHolder;
 import jwp.model.Question;
-import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,6 +32,16 @@ public class QuestionDao {
             pstmt.setObject(4, question.getQuestionId());
         });
     }
+
+    public void updateCountOfAnswer(Question question) throws SQLException {
+        // TODO 구현 필요함.
+        String sql = "update questions set countOfAnswer=? where questionId=?";
+        jdbcTemplate.update(sql, pstmt -> {
+            pstmt.setObject(1, question.getCountOfAnswer());
+            pstmt.setObject(2, question.getQuestionId());
+        });
+    }
+
     public List<Question> findAll() throws SQLException{
         String sql = "SELECT * FROM QUESTIONS";
         return jdbcTemplate.query(sql,
@@ -57,6 +66,6 @@ public class QuestionDao {
                         rs.getDate("createdDate"),
                         rs.getInt("countOfAnswer")),
                 pstmt -> pstmt.setObject(1, questionId));
-
     }
+
 }

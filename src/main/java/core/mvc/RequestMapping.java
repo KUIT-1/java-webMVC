@@ -21,6 +21,8 @@ public class RequestMapping {
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
+        controllers.put("/api/qna/addAnswer", new AnswerAddController());
+
         controllers.put("/qna/updateForm", new QnaUpdateFormController());
         controllers.put("/qna/update", new QnaUpdateController());
 

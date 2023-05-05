@@ -1,7 +1,6 @@
 package jwp.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Question {
     private int questionId;
@@ -20,17 +19,14 @@ public class Question {
         this.countOfAnswer = countOfAnswer;
     }
 
-    public Question(int questionId, String writer, String title, String contents) {
-        this.questionId = questionId;
+    public Question(String writer, String title, String contents) {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
     }
 
-    public Question(String writer, String title, String contents) {
-        this.writer = writer;
-        this.title = title;
-        this.contents = contents;
+    public void increaseCountOfAnswer(){
+        this.countOfAnswer++;
     }
 
     public int getQuestionId() {
