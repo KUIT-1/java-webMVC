@@ -4,8 +4,6 @@ $(".answerWrite input[type=submit]").click(addAnswer);
 function addAnswer(e) {
     e.preventDefault();
     var queryString = $(".submit-write").serialize();
-    //var query = {'questionId' : 1, 'writer': 'thals', 'contents': 'dd'}
-    //console.log(query)
 
     $.ajax({
         type : 'post',
@@ -26,6 +24,10 @@ function onSuccess(json, status){
     let number = parseInt(countOfAnswer.innerText,10);
     number += 1;
     countOfAnswer.textContent = number.toString();
+    var input = document.getElementById("writer");
+    input.value = "";
+    var contents = document.getElementById("contents");
+    contents.value = "";
 }
 
 function onError(xhr, status) {
