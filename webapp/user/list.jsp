@@ -1,10 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<<<<<<< HEAD
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+>>>>>>> f0a8f3d (server 5주차 미션 1-2까지”)
 
 
 <!doctype html>
 <html lang="ko">
+<<<<<<< HEAD
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,6 +62,11 @@
             <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
         </div>
     </header>
+=======
+<%@ include file="/include/header.jspf"%>
+<body>
+<%@ include file="/include/navigation.jspf" %>
+>>>>>>> f0a8f3d (server 5주차 미션 1-2까지”)
 
     <div class="container" id="main">
         <table class="table table-striped">
@@ -69,6 +80,7 @@
             </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
             <%
                 Collection<User> users = (Collection<User>) request.getAttribute("users");
                 for (User user : users) {
@@ -85,6 +97,20 @@
             <%
                 }
             %>
+=======
+
+            <c:forEach items="${users}" var="user">
+            <tr>
+                <th class="col-md-3">${user.userId}
+                </th>
+                <th class="col-md-3">${user.name}
+                </th>
+                <th class="col-md-3">${user.email}
+                </th>
+                <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+            </tr>
+            </c:forEach>
+>>>>>>> f0a8f3d (server 5주차 미션 1-2까지”)
             </tbody>
         </table>
     </div>

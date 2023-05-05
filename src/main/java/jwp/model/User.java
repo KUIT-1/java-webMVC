@@ -13,6 +13,14 @@ public class User {
         this.email = email;
     }
 
+<<<<<<< HEAD
+=======
+    public User(String userId, String password) {
+        this.userId = userId;
+        this.password = password;
+    }
+
+>>>>>>> f0a8f3d (server 5주차 미션 1-2까지”)
     public String getUserId() {
         return userId;
     }
@@ -44,11 +52,19 @@ public class User {
     }
 
     public boolean isSameUser(User user) {
+<<<<<<< HEAD
         return isSameUser(user.getUserId());
     }
 
     public boolean isSameUser(String userId) {
         return userId.equals(this.userId);
+=======
+        return isSameUser(user.getUserId(),user.getPassword());
+    }
+
+    public boolean isSameUser(String userId, String password) {
+        return userId.equals(this.userId) && matchPassword(password);
+>>>>>>> f0a8f3d (server 5주차 미션 1-2까지”)
     }
 
     @Override
