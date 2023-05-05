@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!doctype html>
+<html lang="ko">
+<%@ include file="/include/header.jspf"%>
+<body>
+<%@ include file="/include/navigation.jspf" %>
+=======
 <!doctype html>
 <html lang="ko">
   <head>
@@ -14,7 +24,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
@@ -50,14 +60,16 @@
         </div>
       </header>
     </div>
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
     <div class="container">
       <main class="form-signin">
-        <div>
-          ID와 비밀번호가 틀렸습니다.
-        </div>
         <form name="login" method="post" action="/user/login">
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 0ae3de14b2a46d613396668cc8c5d3d0f43488e3
           <div class="form-floating">
             <input type="text" class="form-control" id="loginId" name="userId" placeholder="id">
             <label for="loginId">ID</label>
