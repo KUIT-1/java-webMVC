@@ -28,9 +28,9 @@ public class RequestMapping {
 
 
         controllers.put("/user/list", new ListUserController());
-
-        controllers.put("/user/login", new LogInController());
-        controllers.put("/user/logout", new LogOutController());
+//
+//        controllers.put("/user/login", new LogInController());
+//        controllers.put("/user/logout", new LogOutController());
 
         controllers.put("/user/signup", new CreateUserController());
 

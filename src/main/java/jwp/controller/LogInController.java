@@ -1,29 +1,34 @@
 package jwp.controller;
 
-import core.mvc.Controller;
-import jwp.dao.UserDao;
+import core.db.MemoryUserRepository;
 import jwp.model.User;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 
-public class LogInController implements Controller {
-    UserDao userDao = new UserDao();
-
+@WebServlet("/user/login")
+public class LogInController extends HttpServlet {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("password");
-        User logInUser = new User(userId, password);
-        User user = userDao.findByUserId(userId);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (user != null && user.isSameUser(logInUser)) {
+        String userId=req.getParameter("userId");
+        User user = MemoryUserRepository.getInstance().findUserById(userId);
+        String password=req.getParameter("password");
+        if(user!=null&user.getPassword().equals(password)){
+            System.out.println("로그인 성공!");
+            HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            return "redirect:/";
+            resp.sendRedirect("/");
+            return;
         }
-        return "redirect:/user/loginFailed";
+        System.out.println("로그인 실패!");
+        resp.sendRedirect("/user/loginFailed.jsp");
+
     }
 }
