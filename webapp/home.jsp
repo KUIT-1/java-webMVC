@@ -5,7 +5,7 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/include/header.jspf"%>
+<%@ include file="/include/header.jspf" %>
 <body>
 <%@ include file="/include/navigation.jspf" %>
     <div class="container" id="main">
@@ -15,22 +15,23 @@
             <%
             List<Question> questions = (List<Question>) request.getAttribute("questions");
             for(Question q : questions) {
+                pageContext.setAttribute("question", q);
             %>
               <li>
                   <div class="wrap">
                       <div class="main">
                           <strong class="subject">
-                              <a href="/qna/show"> <%=q.getTitle()%> </a>
+                          	<a href="/qna/show?questionId=${question.questionId}">${question.title}</a>
                           </strong>
                           <div class="auth-info">
                               <i class="icon-add-comment"></i>
-                              <span class="time"><%=q.getCreatedDate()%></span>
-                              <span clas="author"><%=q.getWriter()%></span>
+                              <span class="time">${question.createdDate}</span>
+                              <span clas="author">${question.writer}</span>
                               <!-- <a href="./user/profile.jsp" class="author">김정우</a> -->
                           </div>
                           <div class="reply" title="댓글">
                               <i class="icon-reply"></i>
-                              <span class="point"><%=q.getCountOfAnswer()%></span>
+                              <span class="point">${question.countOfAnswer}</span>
                           </div>
                       </div>
                   </div>

@@ -14,7 +14,9 @@ public class HomeController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         QuestionDao QDao = new QuestionDao();
         List<Question> questions = QDao.findAll();
+
         req.setAttribute("questions", questions);
+
         return "/home.jsp";
     }
 }

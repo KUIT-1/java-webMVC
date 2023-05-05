@@ -2,6 +2,7 @@ package jwp.dao;
 
 import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
+import core.jdbc.KeyHolder;
 import jwp.model.User;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.List;
 
 // Data Access Object
 public class UserDao {
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    private JdbcTemplate<User> jdbcTemplate = new JdbcTemplate();
     public void insert(User user) throws SQLException {
 
         String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
@@ -23,7 +24,7 @@ public class UserDao {
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getEmail());
-        });
+        },null);
     }
 
     public void update(User user) throws SQLException {
@@ -34,7 +35,7 @@ public class UserDao {
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getUserId());
-        });
+        }, null);
     }
 
     public List<User> findAll() throws SQLException {

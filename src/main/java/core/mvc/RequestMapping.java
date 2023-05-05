@@ -19,19 +19,20 @@ public class RequestMapping {
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
-        controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
-        controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
-
+        controllers.put("/questions/423/form", new Qna423FormController());
+        controllers.put("/qna/change", new QnaChangeController());
 
         controllers.put("/user/list", new ListUserController());
-
         controllers.put("/user/login", new LogInController());
         controllers.put("/user/logout", new LogOutController());
 
         controllers.put("/user/signup", new CreateUserController());
-
         controllers.put("/user/updateForm", new UpdateUserFormController());
         controllers.put("/user/update", new UpdateUserController());
+
+        controllers.put("/qna/form", new QnaFormController());
+        controllers.put("/qna/create", new QnaCreateController());
+        controllers.put("/qna/show", new QnaShowController());
     }
 
     public Controller getController(HttpServletRequest request) {
