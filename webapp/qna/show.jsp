@@ -137,6 +137,6 @@
 </script>
     <script src="../js/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/scripts.js?ver=1.5"></script>
+    <script src="../js/scripts.js?ver=1.6"></script>
   </body>
 </html>

@@ -1,6 +1,8 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.View;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.util.UserSessionUtils;
@@ -14,11 +16,11 @@ public class DeleteQuestionController implements Controller {
     QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
         HttpSession session = req.getSession();
         if (!UserSessionUtils.isLogined(session)) {
-            return "redirect:/users/loginForm";
+            return new JspView("redirect:/users/loginForm");
         }
 
         String questionId = req.getParameter("questionId");
@@ -29,6 +31,6 @@ public class DeleteQuestionController implements Controller {
 
         questionDao.delete(question);
 
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }

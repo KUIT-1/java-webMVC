@@ -1,6 +1,8 @@
 package jwp.controller;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.View;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
@@ -13,13 +15,13 @@ public class UpdateUserFormController implements Controller {
     UserDao userDao = new UserDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String userId = req.getParameter("userId");
         User user = userDao.findByUserId(userId);
         if (user != null) {
             req.setAttribute("user",user);
-            return "/user/updateForm.jsp";
+            return new JspView("/user/updateForm.jsp");
         }
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }
