@@ -21,26 +21,29 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Controller controller = requestMapping.getController(req);
+        Controller controller = getController(req,resp);
+        if(controller==null){
+            return;
+        }
+
         try {
-            String viewName = controller.execute(req, resp);
-            if (viewName == null) {
-                return;
-            }
-            move(viewName, req, resp);
+            View view = controller.execute(req, resp);
+            view.render(req,resp);
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
     }
 
-    private void move(String viewName, HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        if (viewName.startsWith(REDIRECT_PREFIX)) {
-            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
-            return;
-        }
+    // 사용자에게 데이터를 전달하는 책임을 갖는 View라는 인터페이스를 구현하는 JsonView객체와 jspView객체를 추가한다.
 
-        RequestDispatcher rd = req.getRequestDispatcher(viewName);
-        rd.forward(req, resp);
+    private Controller getController(HttpServletRequest request, HttpServletResponse response){
+        Controller controller = requestMapping.getController(request);
+        //Controller 객체가 null일 때 404 Not Found 에러 나도록 처리
+        if(controller==null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        return controller;
     }
+
 }

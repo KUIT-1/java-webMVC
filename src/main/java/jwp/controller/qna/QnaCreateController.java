@@ -1,6 +1,8 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.View;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.support.context.ContextLoaderListener;
@@ -14,7 +16,7 @@ public class QnaCreateController implements Controller {
     private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Question question = new Question(req.getParameter("writer"),
                 req.getParameter("title"),
                 req.getParameter("contents"));
@@ -25,6 +27,6 @@ public class QnaCreateController implements Controller {
         logger.info(que.getContents());
         logger.info(que.getCreatedDate().toString());
 
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }

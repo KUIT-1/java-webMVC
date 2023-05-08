@@ -1,6 +1,8 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.View;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpSession;
 public class QnaUpdateController implements Controller {
     QuestionDao questionDao = new QuestionDao();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         User loginUser = UserSessionUtils.getUserFromSession(session);
 
@@ -30,6 +32,6 @@ public class QnaUpdateController implements Controller {
 
         questionDao.update(question);
 
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }

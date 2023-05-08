@@ -1,6 +1,8 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.JspView;
+import core.mvc.View;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -20,7 +22,7 @@ public class QnaShowController implements Controller {
     private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         User user = UserSessionUtils.getUserFromSession(session);
 
@@ -33,9 +35,9 @@ public class QnaShowController implements Controller {
             req.setAttribute("answers", answerDao.findAllByquestionId(questionId));
             logger.info(answerDao.findAllByquestionId(questionId).toString());
             logger.info(req.getParameter("questionId"));
-            return "/qna/show.jsp";
+            return new JspView("/qna/show.jsp");
         }
 
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }
