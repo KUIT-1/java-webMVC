@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class CreateUserController extends AbstractController {
+public class LogInController extends AbstractController {
     UserDao userDao = new UserDao();
 
     HttpSession session;
@@ -19,12 +19,15 @@ public class CreateUserController extends AbstractController {
 
     @Override
     public ModelAndView execute(Map<String, String> params) throws Exception {
-        User user = new User(params.get("userId"),
-                params.get("password"),
-                params.get("name"),
-                params.get("email"));
+        String userId = params.get("userId");
+        String password = params.get("password");
+        User logInUser = new User(userId, password);
+        User user = userDao.findByUserId(userId);
 
-        userDao.insert(user);
-        return jspView("redirect:/user/list");
+        if (user != null && user.isSameUser(logInUser)) {
+            session.setAttribute("user", user);
+            return jspView("redirect:/");
+        }
+        return jspView("redirect:/user/loginFailed");
     }
 }
