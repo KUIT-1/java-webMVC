@@ -1,29 +1,31 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
-import core.mvc.JspView;
-import core.mvc.View;
+import core.mvc.*;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.util.UserSessionUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 import java.util.Objects;
 
-public class DeleteQuestionController implements Controller {
+public class DeleteQuestionController extends AbstractController {
     QuestionDao questionDao = new QuestionDao();
 
+    HttpSession session;
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
 
-        HttpSession session = req.getSession();
+    @Override
+    public ModelAndView execute(Map<String, String> params) throws Exception {
+
         if (!UserSessionUtils.isLogined(session)) {
-            return new JspView("redirect:/users/loginForm");
+            return jspView("redirect:/users/loginForm");
         }
 
-        String questionId = req.getParameter("questionId");
+        String questionId = params.get("questionId");
         Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
         if (!question.isSameUser(Objects.requireNonNull(UserSessionUtils.getUserFromSession(session)))) {
             throw new IllegalArgumentException();
@@ -31,6 +33,6 @@ public class DeleteQuestionController implements Controller {
 
         questionDao.delete(question);
 
-        return new JspView("redirect:/");
+        return jspView("redirect:/");
     }
 }

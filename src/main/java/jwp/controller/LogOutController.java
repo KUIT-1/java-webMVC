@@ -1,20 +1,22 @@
 package jwp.controller;
 
-import core.mvc.Controller;
-import core.mvc.JspView;
-import core.mvc.View;
+import core.mvc.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
+public class LogOutController extends AbstractController {
 
-public class LogOutController implements Controller {
+    HttpSession session;
+    @Override
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        HttpSession session = req.getSession();
+    public ModelAndView execute(Map<String, String> params) throws Exception {
         session.removeAttribute("user");
-        return new JspView("redirect:/");
+        return jspView("redirect:/");
     }
 }
