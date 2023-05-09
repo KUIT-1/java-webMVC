@@ -1,8 +1,6 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
-import core.mvc.JspView;
-import core.mvc.View;
+import core.mvc.*;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
@@ -11,15 +9,21 @@ import jwp.util.UserSessionUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
-public class QnaUpdateController implements Controller {
+public class QnaUpdateController extends AbstractController {
     QuestionDao questionDao = new QuestionDao();
+    HttpSession session;
+
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        HttpSession session = req.getSession();
+    public void setSession(HttpSession httpSession) {
+        this.session = httpSession;
+    }
+    @Override
+    public ModelAndView execute(Map<String, String> params) throws Exception {
         User loginUser = UserSessionUtils.getUserFromSession(session);
 
-        int questionId = Integer.parseInt(req.getParameter("questionId"));
+        int questionId = Integer.parseInt(params.get("questionId"));
         Question question = questionDao.findByQuestionId(questionId);
 
         assert loginUser != null;
@@ -27,11 +31,11 @@ public class QnaUpdateController implements Controller {
             throw new IllegalArgumentException();
         }
 
-        question.update(req.getParameter("title"),
-                req.getParameter("contents"));
+        question.update(params.get("title"),
+                params.get("contents"));
 
         questionDao.update(question);
 
-        return new JspView("redirect:/");
+        return jspView("redirect:/");
     }
 }

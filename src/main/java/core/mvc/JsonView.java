@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class JsonView implements View{
     @Override
-    public void render(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void render(Map<String,Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         //Json 데이터를 사용자에게 전달
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.print(mapper.writeValueAsString(createModel(request)));
+        out.print(mapper.writeValueAsString(model));
 
         // 전달되는 Json 객체
         // {

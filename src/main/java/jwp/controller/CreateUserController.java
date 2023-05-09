@@ -1,26 +1,28 @@
 package jwp.controller;
 
-import core.mvc.Controller;
-import core.mvc.JspView;
-import core.mvc.View;
+import core.mvc.*;
 import jwp.dao.UserDao;
 import jwp.model.User;
+import jwp.support.context.ContextLoaderListener;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+import java.util.logging.Logger;
 
 
-public class CreateUserController implements Controller {
+public class CreateUserController extends AbstractController {
     UserDao userDao = new UserDao();
+    private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    public ModelAndView execute(Map<String, String> params) throws Exception {
+        User user = new User(params.get("userId"),
+                params.get("password"),
+                params.get("name"),
+                params.get("email"));
 
         userDao.insert(user);
-        return new JspView("redirect:/user/list");
+        return jspView("/user/login.jsp");
     }
 }

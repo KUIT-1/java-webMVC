@@ -1,5 +1,7 @@
 package core.mvc;
 
+import jwp.support.context.ContextLoaderListener;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
 
     private RequestMapping requestMapping;
-    private static final String REDIRECT_PREFIX = "redirect:";
+    private static final Logger logger = Logger.getLogger(ContextLoaderListener.class.getName());
 
     @Override
     public void init() throws ServletException {
@@ -27,8 +32,9 @@ public class DispatcherServlet extends HttpServlet {
         }
 
         try {
-            View view = controller.execute(req, resp);
-            view.render(req,resp);
+            Map<String, String> map = createParams(req);
+            ModelAndView mov = controller.execute(map);
+            mov.getView().render(mov.getModel(), req, resp); // view를 rendering 할 때 data가 담긴 model을 전달해준다.
         } catch (Throwable e) {
             throw new ServletException(e.getMessage());
         }
@@ -43,7 +49,14 @@ public class DispatcherServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
+        controller.setSession(request.getSession());
         return controller;
+    }
+
+    private Map<String, String> createParams(HttpServletRequest request){
+        Map<String, String> params = new HashMap<>();
+        request.getParameterNames().asIterator().forEachRemaining(paramName -> params.put(paramName, request.getParameter(paramName)));
+        return params;
     }
 
 }
