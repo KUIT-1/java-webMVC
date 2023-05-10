@@ -1,7 +1,8 @@
 package jwp.controller.qna;
 
-import core.db.MemoryUserRepository;
-import jwp.controller.Controller;
+import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.view;
 import jwp.dao.QuestionDao;
 
 import javax.servlet.ServletException;
@@ -14,14 +15,14 @@ public class QnaFormController implements Controller {
     private static final String USER_SESSION_KEY = "user";
     QuestionDao questionDao = new QuestionDao();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+    public view execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
         HttpSession session = req.getSession();
         Object value = session.getAttribute(USER_SESSION_KEY);
 
         if (value == null) {
-            return "redirect:/";
+            return new JspView("redirect:/");
         }
 
-        return "/qna/form.jsp";
+        return new JspView("/qna/form.jsp");
     }
 }

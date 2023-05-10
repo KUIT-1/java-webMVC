@@ -1,6 +1,7 @@
 package jwp.controller.qna;
 
-import jwp.controller.Controller;
+import core.mvc.Controller;
+import core.mvc.view.view;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 
 public class DeleteQnaController implements Controller {
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+    public view execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         return null;
     }
 }

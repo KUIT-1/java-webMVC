@@ -1,12 +1,12 @@
 package jwp.controller;
 
-import core.db.MemoryUserRepository;
+import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.view;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class LoginUserController implements Controller {
     UserDao userDao = new UserDao();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+    public view execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         String userId = req.getParameter("userId");
         User user = userDao.findByUserId(userId);
 
@@ -26,6 +26,6 @@ public class LoginUserController implements Controller {
         HttpSession session = req.getSession();
         session.setAttribute("user",user);
 
-        return "redirect:/user/list";
+        return new JspView("redirect:/user/list");
     }
 }

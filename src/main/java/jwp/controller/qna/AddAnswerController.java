@@ -1,7 +1,9 @@
 package jwp.controller.qna;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jwp.controller.Controller;
+import core.mvc.Controller;
+import core.mvc.view.JsonView;
+import core.mvc.view.view;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -18,7 +20,7 @@ public class AddAnswerController implements Controller {
     AnswerDao answerDao = new AnswerDao();
     QuestionDao questionDao = new QuestionDao();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+    public view execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         System.out.println("addanswerController");
 
         System.out.println(req.getParameter("questionId"));
@@ -30,11 +32,14 @@ public class AddAnswerController implements Controller {
         Question question = questionDao.findByQuestionId(answer.getQuestionId());
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
-        ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.print(mapper.writeValueAsString(savedAnswer));
 
-        return null;
+        req.setAttribute("answer",savedAnswer);
+        /*
+        answer{
+            attrname : ""
+        }
+         */
+
+        return new JsonView();
     }
 }

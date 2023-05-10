@@ -1,4 +1,4 @@
-package core;
+package core.mvc;
 
 import jwp.controller.*;
 import jwp.controller.qna.*;

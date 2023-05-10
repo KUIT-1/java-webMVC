@@ -1,10 +1,10 @@
 package jwp.controller.qna;
 
-import jwp.controller.Controller;
+import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.view;
 import jwp.dao.QuestionDao;
-import jwp.dao.UserDao;
 import jwp.model.Question;
-import jwp.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class UpdateQnaController implements Controller {
 
     QuestionDao questionDao = new QuestionDao();
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+    public view execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         Question question = new Question(
                 Integer.parseInt(req.getParameter("questionId")),
                 req.getParameter("title"),
@@ -24,6 +24,6 @@ public class UpdateQnaController implements Controller {
         );
 
         questionDao.update(question);
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 }
