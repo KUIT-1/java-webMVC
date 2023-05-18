@@ -1,26 +1,27 @@
 package jwp.controller;
 
-import core.db.MemoryUserRepository;
+import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.view;
+import jwp.dao.UserDao;
 import jwp.model.User;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet("/user/signup")
-public class CreateUserController extends HttpServlet {
+public class CreateUserController implements Controller {
+
+    UserDao userDao = new UserDao();
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public view execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
-        System.out.println("??");
-        resp.sendRedirect("/user/list");
+        userDao.insert(user);
+        return new JspView("redirect:/user/list");
     }
 }
